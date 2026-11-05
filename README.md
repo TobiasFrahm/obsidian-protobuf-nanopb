@@ -89,6 +89,8 @@ This plugin provides syntax highlighting. It does not validate or compile Protoc
 
 ## Publishing
 
+Release notes are maintained in [CHANGELOG.md](CHANGELOG.md). Use `0.1.0` for the initial Git tag.
+
 1. Publish the source in a public GitHub repository. Keep `README.md`, `LICENSE`, and `manifest.json` at the repository root.
 2. Run `npm install`, `npm test`, and `npm run build`.
 3. Create a GitHub release tagged `0.1.0`. The tag must exactly match the version in `manifest.json`, without a `v` prefix.
@@ -97,6 +99,15 @@ This plugin provides syntax highlighting. It does not validate or compile Protoc
 6. Address automated review feedback and publish a new version for corrections.
 
 The included GitHub Action runs tests and builds the plugin, then uploads the plugin files as a workflow artifact. It does not publish a GitHub release.
+
+To upload a locally prepared commit and tag to GitHub:
+
+```sh
+git push origin HEAD
+git push origin 0.1.0
+```
+
+Then create a release on GitHub using the existing `0.1.0` tag, copy its notes from the changelog, and attach the three plugin files. A Git tag alone does not create a GitHub release.
 
 For subsequent releases, update `package.json`, `manifest.json`, and `versions.json`, rebuild, and publish the release assets under the matching version tag.
 
