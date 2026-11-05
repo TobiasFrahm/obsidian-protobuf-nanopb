@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - manifest.json
+      - .github/workflows/release.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: plugin-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - name: Validate release version
+        id: version
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const manifest = JSON.parse(fs.readFileSync('manifest.json', 'utf8'));
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const lock = JSON.parse(fs.readFileSync('package-lock.json', 'utf8'));
+          const versions = JSON.parse(fs.readFileSync('versions.json', 'utf8'));
+          if (!/^\d+\.\d+\.\d+$/.test(manifest.version)) throw new Error('Invalid release version');
+          if ([pkg.version, lock.version, lock.packages[''].version].some(v => v !== manifest.version)) {
+            throw new Error('Package and manifest versions must match');
+          }
+          if (versions[manifest.version] !== manifest.minAppVersion) throw new Error('Update versions.json');
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `value=${manifest.version}\n`);
+          NODE
+      - name: Publish release and plugin assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_VERSION: ${{ steps.version.outputs.value }}
+        run: |
+          if gh release view "$RELEASE_VERSION" > /dev/null 2>&1; then
+            if [ "$(gh release view "$RELEASE_VERSION" --json isDraft --jq .isDraft)" != "true" ]; then
+              echo "Release already published; increase the manifest version for a new release."
+              exit 0
+            fi
+          else
+            gh release create "$RELEASE_VERSION" --target "$GITHUB_SHA" --title "$RELEASE_VERSION" --notes-file CHANGELOG.md --draft
+          fi
+          gh release upload "$RELEASE_VERSION" main.js manifest.json styles.css --clobber
+          gh release edit "$RELEASE_VERSION" --draft=false

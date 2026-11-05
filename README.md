@@ -89,27 +89,20 @@ This plugin provides syntax highlighting. It does not validate or compile Protoc
 
 ## Publishing
 
-Release notes are maintained in [CHANGELOG.md](CHANGELOG.md). Use `0.1.0` for the initial Git tag.
+Release notes are maintained in [CHANGELOG.md](CHANGELOG.md). The current release version is `0.1.1`.
 
-1. Publish the source in a public GitHub repository. Keep `README.md`, `LICENSE`, and `manifest.json` at the repository root.
-2. Run `npm install`, `npm test`, and `npm run build`.
-3. Create a GitHub release tagged `0.1.0`. The tag must exactly match the version in `manifest.json`, without a `v` prefix.
-4. Attach `main.js`, `manifest.json`, and `styles.css` as individual release assets. GitHub's automatically generated source archives are not sufficient for installation through Obsidian.
-5. Sign in at [community.obsidian.md](https://community.obsidian.md), link your GitHub account, and submit the repository as a new plugin. Commit the current manifest to the repository's default branch before submitting.
-6. Address automated review feedback and publish a new version for corrections.
+The **Release** GitHub Action runs when `manifest.json` or the release workflow changes on `main`. It installs dependencies, runs tests, builds the plugin, validates version consistency, and publishes a GitHub release tagged exactly like the manifest version, without a `v` prefix. The release includes `main.js`, `manifest.json`, and `styles.css` as individual assets. Already published releases are left unchanged.
 
-The included GitHub Action runs tests and builds the plugin, then uploads the plugin files as a workflow artifact. It does not publish a GitHub release.
+To publish a new version:
 
-To upload a locally prepared commit and tag to GitHub:
+1. Update the version in `manifest.json`, `package.json`, and `package-lock.json`, and add the minimum Obsidian version to `versions.json`.
+2. Add release notes to `CHANGELOG.md` and test the plugin in Obsidian.
+3. Commit the changes and push to `main`.
+4. Wait for **Actions → Release** to finish and verify the published release and its three assets.
 
-```sh
-git push origin HEAD
-git push origin 0.1.0
-```
+You can also run **Actions → Release → Run workflow** on `main` to retry publication. The workflow uses GitHub's built-in token with repository contents write permission; no personal access token is needed.
 
-Then create a release on GitHub using the existing `0.1.0` tag, copy its notes from the changelog, and attach the three plugin files. A Git tag alone does not create a GitHub release.
-
-For subsequent releases, update `package.json`, `manifest.json`, and `versions.json`, rebuild, and publish the release assets under the matching version tag.
+For the first Community directory submission, sign in at [community.obsidian.md](https://community.obsidian.md), link your GitHub account, and submit the repository. Commit the current manifest to the default branch and publish the matching release before requesting review.
 
 See the [official submission guide](https://docs.obsidian.md/Plugins/Releasing/Submit%20your%20plugin) for the publication process and requirements.
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1 — 2026-11-05
+
+- Rename the plugin to Protobuf and Nanopb Highlighting to comply with Obsidian's naming rules.
+- Add automated GitHub releases with the three required plugin assets and matching version tags.
+
 ## 0.1.0 — 2026-11-05
 
 Initial release of Protobuf & Nanopb Highlighting for Obsidian.
