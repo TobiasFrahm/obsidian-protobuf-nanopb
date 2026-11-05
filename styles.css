@@ -1,0 +1,14 @@
+.protobuf-nanopb-token.pbn-comment { color: var(--code-comment); }
+.protobuf-nanopb-token.pbn-string { color: var(--code-string); }
+.protobuf-nanopb-token.pbn-keyword { color: var(--code-keyword); }
+.protobuf-nanopb-token.pbn-builtin,
+.protobuf-nanopb-token.pbn-class-name { color: var(--code-function); }
+.protobuf-nanopb-token.pbn-number,
+.protobuf-nanopb-token.pbn-boolean,
+.protobuf-nanopb-token.pbn-constant { color: var(--code-value); }
+.protobuf-nanopb-token.pbn-nanopb-extension { color: var(--code-important); }
+.protobuf-nanopb-token.pbn-nanopb-option,
+.protobuf-nanopb-token.pbn-field-pattern { color: var(--code-property); }
+.protobuf-nanopb-token.pbn-operator { color: var(--code-operator); }
+.protobuf-nanopb-token.pbn-punctuation { color: var(--code-punctuation); }
+.protobuf-nanopb-block { position: relative; }
