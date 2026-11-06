@@ -25,7 +25,7 @@ const common: Prism.Grammar = {
   boolean: /\b(?:true|false)\b/,
   number: /\b(?:0x[\da-f]+|(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?)\b|\b(?:inf|nan)\b/i,
   constant: /\b[A-Z][A-Z_\d]*\b/,
-  operator: /[=:+\-]/,
+  operator: /[=:+-]/,
   punctuation: /[{}[\];(),.<>]/
 };
 

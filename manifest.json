@@ -1,7 +1,7 @@
 {
   "id": "protobuf-nanopb",
   "name": "Protobuf and Nanopb Highlighting",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "minAppVersion": "1.8.7",
   "description": "Syntax highlighting for Protocol Buffers and nanopb options in fenced code blocks.",
   "author": "Tobias Frahm-Meurers",

@@ -1,6 +1,6 @@
 {
   "name": "obsidian-protobuf-nanopb",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "Protocol Buffers and nanopb syntax highlighting for Obsidian",
   "scripts": {

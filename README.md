@@ -1,4 +1,4 @@
-# Protobuf & Nanopb Highlighting for Obsidian
+# Protobuf and Nanopb Highlighting
 
 Syntax highlighting for Protocol Buffers and nanopb code blocks in Obsidian. Supports Reading view, Live Preview, and Source mode, using your active theme's code colors. No configuration required.
 
@@ -57,7 +57,7 @@ Once a release is available:
 2. Create the folder `.obsidian/plugins/protobuf-nanopb/` inside your vault.
 3. Copy all three files into that folder.
 4. Reload Obsidian.
-5. Open **Settings → Community plugins**, disable Restricted mode if necessary, and enable **Protobuf & Nanopb Highlighting**.
+5. Open **Settings → Community plugins**, disable Restricted mode if necessary, and enable **Protobuf and Nanopb Highlighting**.
 
 ### From source
 
@@ -89,7 +89,7 @@ This plugin provides syntax highlighting. It does not validate or compile Protoc
 
 ## Publishing
 
-Release notes are maintained in [CHANGELOG.md](CHANGELOG.md). The current release version is `0.1.1`.
+Release notes are maintained in [CHANGELOG.md](CHANGELOG.md). The current release version is `0.1.2`.
 
 The **Release** GitHub Action runs when `manifest.json` or the release workflow changes on `main`. It installs dependencies, runs tests, builds the plugin, validates version consistency, and publishes a GitHub release tagged exactly like the manifest version, without a `v` prefix. The release includes `main.js`, `manifest.json`, and `styles.css` as individual assets. Already published releases are left unchanged.
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2 — 2026-11-06
+
+- Remove an unnecessary escape in the syntax highlighting grammar.
+- Match the README title and installation instructions to the manifest name.
+- Generate GitHub artifact attestations for all three release assets.
+
 ## 0.1.1 — 2026-11-05
 
 - Rename the plugin to Protobuf and Nanopb Highlighting to comply with Obsidian's naming rules.

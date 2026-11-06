@@ -10,6 +10,8 @@ on:
 
 permissions:
   contents: write
+  id-token: write
+  attestations: write
 
 concurrency:
   group: plugin-release
@@ -44,6 +46,13 @@ jobs:
           if (versions[manifest.version] !== manifest.minAppVersion) throw new Error('Update versions.json');
           fs.appendFileSync(process.env.GITHUB_OUTPUT, `value=${manifest.version}\n`);
           NODE
+      - name: Attest release assets
+        uses: actions/attest@v4
+        with:
+          subject-path: |
+            main.js
+            manifest.json
+            styles.css
       - name: Publish release and plugin assets
         env:
           GH_TOKEN: ${{ github.token }}
